@@ -21,5 +21,7 @@ from home import views
 app_name = "home"
 urlpatterns = [
     path("home/", views.home, name="home"),
-    path("homebase/", views.Home.as_view(), name="home"),
+    path("homebase/", views.HomeView.as_view(), name="home"),
+    path("nameparam/", views.NameParamsView.as_view(), name="nameparam"),
+    path("<str:name>/", views.NameView.as_view(), name="name"),
 ]
