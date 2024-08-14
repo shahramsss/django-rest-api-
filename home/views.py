@@ -1,6 +1,8 @@
 from rest_framework.decorators import api_view
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from home.models import Person
+from home.serializers import PersonSerializer
 
 
 @api_view(["GET", "POST", "PUT"])
@@ -29,3 +31,8 @@ class NameParamsView(APIView):
         return Response(data={"name": name})
 
 
+class HomeSerializerView(APIView):
+    def get(self , request):
+        persons = Person.objects.all()
+        ser_data = PersonSerializer(persons , many= True )
+        return Response(data=ser_data.data)
