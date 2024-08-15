@@ -35,6 +35,10 @@ class UserRegistrModelSerialiser(serializers.ModelSerializer):
             "email": {"validators": (clean_email,)},
         }
 
+    def create(self, validated_data):
+        del validated_data["password2"]
+        return User.objects.create(**validated_data)
+
     def validate_username(self, value):
         if value == "admin":
             raise serializers.ValidationError("user name cant be admin")
