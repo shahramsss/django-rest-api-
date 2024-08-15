@@ -4,12 +4,13 @@ from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.contrib.auth.models import User
-from .serializers import UserRegistrSerialiser
+from .serializers import UserRegistrSerialiser , UserRegistrModelSerialiser
 
 
 class UserRegister(APIView):
     def post(self, request):
-        ser_data = UserRegistrSerialiser(data=request.POST)
+        # ser_data = UserRegistrSerialiser(data=request.POST)
+        ser_data = UserRegistrModelSerialiser(data=request.POST)
         if ser_data.is_valid():
             User.objects.create(
                 username=ser_data.validated_data["username"],
