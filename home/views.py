@@ -3,6 +3,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from home.models import Person
 from home.serializers import PersonSerializer
+from rest_framework.permissions import IsAdminUser, IsAuthenticated
 
 
 @api_view(["GET", "POST", "PUT"])
@@ -23,16 +24,20 @@ class NameView(APIView):
 class NameParamsView(APIView):
     def get(self, request):
         # name = request.GET['name']
-        name = request.query_params['name']
+        name = request.query_params["name"]
         return Response(data={"name": name})
-    
-    def post(self , request):
-        name = request.data['name']
+
+    def post(self, request):
+        name = request.data["name"]
         return Response(data={"name": name})
 
 
 class HomeSerializerView(APIView):
-    def get(self , request):
+    permission_classes = [
+        IsAdminUser,
+    ]
+
+    def get(self, request):
         persons = Person.objects.all()
-        ser_data = PersonSerializer(persons , many= True )
+        ser_data = PersonSerializer(persons, many=True)
         return Response(data=ser_data.data)
