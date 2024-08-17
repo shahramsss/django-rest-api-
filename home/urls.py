@@ -25,6 +25,10 @@ urlpatterns = [
     path("nameparam/", views.NameParamsView.as_view(), name="nameparam"),
     # path("<str:name>/", views.NameView.as_view(), name="name"),
     path("homeser/", views.HomeSerializerView.as_view(), name="homeser"),
-    path("questions/", views.QuestionView.as_view(), name="questions"),
-    path("questions/<int:pk>/", views.QuestionView.as_view(), name="questions_update"),
+    # path("questions/", views.QuestionView.as_view(), name="questions"),
+    path("questions/", views.QuestionListView.as_view(), name="questions"),
+    path("question/creat/", views.QuestionCreatView.as_view(), name="creat_questions"),
+    path("question/<int:pk>/", views.QuestionView.as_view(), name="questions_update"),
+    path("question/update/<int:pk>/", views.QuestionUpdateView.as_view(), name="questions_update"),
+    path("question/delete/<int:pk>/", views.QuestionDeleteView.as_view(), name="questions_delete"),
 ]
