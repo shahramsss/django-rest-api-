@@ -1,9 +1,10 @@
 from rest_framework.decorators import api_view
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from home.models import Person
-from home.serializers import PersonSerializer
+from home.models import Person, Answers, Question
+from home.serializers import PersonSerializer, AnswerSerializer, QuestioinSerializer
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
+from rest_framework import status
 
 
 @api_view(["GET", "POST", "PUT"])
@@ -41,3 +42,19 @@ class HomeSerializerView(APIView):
         persons = Person.objects.all()
         ser_data = PersonSerializer(persons, many=True)
         return Response(data=ser_data.data)
+
+
+class QuestionView(APIView):
+    def get(self, request):
+        questions = Question.objects.all()
+        ser_data = QuestioinSerializer(instance=questions, many=True)
+        return Response(data=ser_data.data, status=status.HTTP_200_OK)
+
+    def post(self, request):
+        pass
+
+    def put(self, request, pk):
+        pass
+
+    def delete(self, request, pk):
+        pass
