@@ -26,4 +26,5 @@ urlpatterns = [
     # path("<str:name>/", views.NameView.as_view(), name="name"),
     path("homeser/", views.HomeSerializerView.as_view(), name="homeser"),
     path("questions/", views.QuestionView.as_view(), name="questions"),
+    path("questions/<int:pk>/", views.QuestionView.as_view(), name="questions_update"),
 ]

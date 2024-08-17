@@ -58,7 +58,16 @@ class QuestionView(APIView):
         return Response(data=ser_data.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request, pk):
-        pass
+        question = Question.objects.get(pk=pk)
+        ser_data = QuestioinSerializer(
+            instance=question, data=request.data, partial=True
+        )
+        if ser_data.is_valid():
+            ser_data.save()
+            return Response(data=ser_data.data, status=status.HTTP_200_OK)
+        return Response(data=ser_data.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk):
-        pass
+        question = Question.objects.get(pk=pk)
+        question.delete()
+        return Response({"message":"question deleted"}, status=status.HTTP_200_OK)
