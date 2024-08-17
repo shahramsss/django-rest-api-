@@ -51,7 +51,11 @@ class QuestionView(APIView):
         return Response(data=ser_data.data, status=status.HTTP_200_OK)
 
     def post(self, request):
-        pass
+        ser_data = QuestioinSerializer(data=request.data)
+        if ser_data.is_valid():
+            ser_data.save()
+            return Response(data=ser_data.data, status=status.HTTP_200_OK)
+        return Response(data=ser_data.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request, pk):
         pass
