@@ -75,6 +75,7 @@ class QuestionView(APIView):
 
 
 class QuestionListView(APIView):
+    throttle_scope = "questions"
     def get(self, request):
         questions = Question.objects.all()
         ser_data = QuestioinSerializer(instance=questions, many=True)
