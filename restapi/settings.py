@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "accounts",
     # third apps
     "rest_framework",
+    "drf_spectacular",
 ]
 
 MIDDLEWARE = [
@@ -149,4 +150,12 @@ REST_FRAMEWORK = {
     "DEFAULT_THROTTLE_RATES": {
         "questions": "3/minuts",
     },
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'my api project',
+    'DESCRIPTION': 'Your project description',
+    'VERSION': '1.0.0',
+    # OTHER SETTINGS
 }

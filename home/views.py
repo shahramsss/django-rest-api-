@@ -46,6 +46,7 @@ class HomeSerializerView(APIView):
 
 
 class QuestionView(APIView):
+    serializer_class = QuestioinSerializer
     def get(self, request):
         questions = Question.objects.all()
         ser_data = QuestioinSerializer(instance=questions, many=True)
@@ -75,6 +76,7 @@ class QuestionView(APIView):
 
 
 class QuestionListView(APIView):
+    serializer_class = QuestioinSerializer
     throttle_scope = "questions"
     def get(self, request):
         questions = Question.objects.all()
@@ -83,6 +85,7 @@ class QuestionListView(APIView):
 
 
 class QuestionCreatView(APIView):
+    serializer_class = QuestioinSerializer
     def post(self, request):
         ser_data = QuestioinSerializer(data=request.data)
         if ser_data.is_valid():
