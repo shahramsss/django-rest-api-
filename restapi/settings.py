@@ -151,11 +151,15 @@ REST_FRAMEWORK = {
         "questions": "3/minuts",
     },
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+    "DEFAULT_RENDERER_CLASSES": [
+        "rest_framework.renderers.JSONRenderer",
+        "rest_framework.renderers.BrowsableAPIRenderer",
+    ],
 }
 
 SPECTACULAR_SETTINGS = {
-    'TITLE': 'my api project',
-    'DESCRIPTION': 'Your project description',
-    'VERSION': '1.0.0',
+    "TITLE": "my api project",
+    "DESCRIPTION": "Your project description",
+    "VERSION": "1.0.0",
     # OTHER SETTINGS
 }
