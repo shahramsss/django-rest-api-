@@ -25,6 +25,7 @@ app_name = "accounts"
 urlpatterns = [
     path("register/", views.UserRegister.as_view(), name="register"),
     path("api-token-auth/", auth_token.obtain_auth_token),
+    path("userlist/", views.UserListView.as_view() , ),
 ]
 
 router = routers.SimpleRouter()

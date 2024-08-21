@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from rest_framework import generics
 
 # Create your views here.
 from rest_framework.views import APIView
@@ -12,6 +12,7 @@ from .serializers import (
 from rest_framework import status, viewsets
 from rest_framework.permissions import IsAuthenticated
 from django.shortcuts import get_object_or_404
+from django.core.paginator import Paginator
 
 
 class UserRegister(APIView):
@@ -37,7 +38,10 @@ class UserViewSet(viewsets.ViewSet):
     queryset = User.objects.all()
 
     def list(self, request):
-        ser_data = UserSerializer(instance=self.queryset, many=True)
+        page_number = request.query_params.get("page", 1)
+        page_size = request.query_params.get("limit", 2)
+        paginator = Paginator(self.queryset, page_size)
+        ser_data = UserSerializer(instance=paginator.page(page_number), many=True)
         return Response(data=ser_data.data, status=status.HTTP_200_OK)
 
     def update(self, request):
@@ -65,3 +69,8 @@ class UserViewSet(viewsets.ViewSet):
         user.is_active = False
         user.save()
         return Response(data={"message": "user deactivcted"})
+
+
+class UserListView(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
