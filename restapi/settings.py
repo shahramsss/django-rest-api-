@@ -158,6 +158,7 @@ REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
     # "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
     # "PAGE_SIZE": 2,
+    'DEFAULT_METADATA_CLASS': 'permissins.CustomMetaData',
 }
 
 SPECTACULAR_SETTINGS = {
